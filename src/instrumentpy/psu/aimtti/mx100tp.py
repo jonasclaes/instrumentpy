@@ -314,3 +314,33 @@ class MX100TP():
         """
         self._device.send_command("NETCONFIG?\n")
         return self._device.receive_output()
+
+    def set_netconfig(self, config_type: str) -> None:
+        """
+        Implemented command: NETCONFIG <CPD>
+
+        Specifies the first means by which an IP address will be sought.
+        <CPD> must be one of DHCP, AUTO or STATIC.
+        """
+        self._device.send_command(f"NETCONFIG;{config_type}\n")
+
+    def set_ip_address(self, address: str) -> None:
+        """
+        Implemented command: IPADDR <QUAD>
+
+        Sets the potential static IP address of the LAN interface (as on the
+        webpage).
+        The parameter must be strictly a dotted quad for the IP address, with each
+        address part an <NR1> in the range 0 to 255, (e.g. 192.168.1.101).
+        """
+        self._device.send_command(f"IPADDR;{address}\n")
+
+    def set_netmask(self, address: str) -> None:
+        """
+        Implemented command: NETMASK <QUAD>
+
+        Sets the netmask to accompany the static IP address of the LAN interface.
+        The parameter must be strictly a dotted quad for the netmask, with each
+        part an <NR1> in the range 0 to 255, (e.g. 255.255.255.0).
+        """
+        self._device.send_command(f"NETMASK;{address}\n")
