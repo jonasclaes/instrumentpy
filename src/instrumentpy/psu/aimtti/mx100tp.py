@@ -11,14 +11,14 @@ class MX100TP():
 
     At the moment, only serial communications are implemented.
     """
-    _device: CommonDeviceInterface | None = None
+    _device: CommonDeviceInterface = None
 
     def __init__(self, device: CommonDeviceInterface) -> None:
         self._device = device
 
     # Instrument Function Commands
 
-    def set_channel_voltage(self, channel: int, value: int | float) -> None:
+    def set_channel_voltage(self, channel: int, value: float) -> None:
         """
         Implemented command: V<N> <NRF>
 
@@ -26,7 +26,7 @@ class MX100TP():
         """
         self._device.send_command(f"V{channel} {value}\n")
 
-    def set_channel_voltage_with_verify(self, channel: int, value: int | float) -> None:
+    def set_channel_voltage_with_verify(self, channel: int, value: float) -> None:
         """
         Implemented command: V<N>V <NRF>
 
@@ -34,7 +34,7 @@ class MX100TP():
         """
         self._device.send_command(f"V{channel}V {value}\n")
 
-    def set_channel_over_voltage_protection(self, channel: int, value: int | float) -> None:
+    def set_channel_over_voltage_protection(self, channel: int, value: float) -> None:
         """
         Implemented command: OVP<N> <NRF>
 
@@ -51,7 +51,7 @@ class MX100TP():
         """
         self._device.send_command(f"OVP{channel} {state}\n")
 
-    def set_channel_current_limit(self, channel: int, value: int | float) -> None:
+    def set_channel_current_limit(self, channel: int, value: float) -> None:
         """
         Implemented command: I<N> <NRF>
 
@@ -59,7 +59,7 @@ class MX100TP():
         """
         self._device.send_command(f"I{channel} {value}\n")
 
-    def set_channel_over_current_protection(self, channel: int, value: int | float) -> None:
+    def set_channel_over_current_protection(self, channel: int, value: float) -> None:
         """
         Implemented command: OCP<N> <NRF>
 
@@ -149,7 +149,7 @@ class MX100TP():
         self._device.send_command(f"I{channel}O?\n")
         return self._device.receive_output()
 
-    def set_channel_voltage_stepsize(self, channel: int, value: int | float) -> None:
+    def set_channel_voltage_stepsize(self, channel: int, value: float) -> None:
         """
         Implemented command: DELTAV<N> <NRF>
 
@@ -157,7 +157,7 @@ class MX100TP():
         """
         self._device.send_command(f"DELTAV{channel} {value}\n")
 
-    def set_channel_current_stepsize(self, channel: int, value: int | float) -> None:
+    def set_channel_current_stepsize(self, channel: int, value: float) -> None:
         """
         Implemented command: DELTAI<N> <NRF>
 
@@ -531,7 +531,7 @@ class MX100TP():
         self._device.send_command(f"LSR{register_number}?\n")
         return self._device.receive_output()
 
-    def set_limit_status_enable_register(self, register_number: int, limit: int | float) -> None:
+    def set_limit_status_enable_register(self, register_number: int, limit: float) -> None:
         """
         Implemented command: LSE<N> <NRF>
 
@@ -581,7 +581,7 @@ class MX100TP():
         self._device.send_command("*STB?\n")
         return self._device.receive_output()
 
-    def set_service_request_enable_register(self, value: int | float) -> None:
+    def set_service_request_enable_register(self, value: float) -> None:
         """
         Implemented command: *SRE <NRF>
 
@@ -599,7 +599,7 @@ class MX100TP():
         self._device.send_command("*SRE?\n")
         return self._device.receive_output()
 
-    def set_parallel_poll_enable_register(self, value: int | float) -> None:
+    def set_parallel_poll_enable_register(self, value: float) -> None:
         """
         Implemented command: *PRE <NRF>
 
