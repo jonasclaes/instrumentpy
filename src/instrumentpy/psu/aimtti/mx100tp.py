@@ -129,7 +129,7 @@ class MX100TP():
         self._device.send_command(f"OCP{channel}?\n")
         return self._device.receive_output()
 
-    def get_channel_voltage(self, channel: int) -> str:
+    def get_channel_voltage(self, channel: int) -> float:
         """
         Implemented command: V<N>O?
 
@@ -137,9 +137,9 @@ class MX100TP():
         Response is <NR2>V<RMT> where <NR2> is in Volts.
         """
         self._device.send_command(f"V{channel}O?\n")
-        return self._device.receive_output()
+        return float(self._device.receive_output().strip()[:-1])
 
-    def get_channel_current(self, channel: int) -> str:
+    def get_channel_current(self, channel: int) -> float:
         """
         Implemented command: I<N>O?
 
@@ -147,7 +147,7 @@ class MX100TP():
         Response is <NR2>A<RMT> where <NR2> is in Amps.
         """
         self._device.send_command(f"I{channel}O?\n")
-        return self._device.receive_output()
+        return float(self._device.receive_output().strip()[:-1])
 
     def set_channel_voltage_stepsize(self, channel: int, value: float) -> None:
         """
