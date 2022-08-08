@@ -17,11 +17,26 @@ class SerialDevice(CommonDeviceInterface):
         self._serial = serial
 
     def send_command(self, data: str) -> bool:
-        if self._serial.is_open is False:
-            self._serial.open()
-        return super().send_command(data)
+        """
+        Send a command through the serial connection.
 
-    def receive_output(self, lines: int = 1) -> str:
+        Encoding happens because typically these serial instruments
+        don't understand UTF-8 and ask for binary encoded characters.
+        """
         if self._serial.is_open is False:
             self._serial.open()
-        return super().receive_output(lines)
+
+        return self._serial.write(data.encode())
+
+    def receive_output(self) -> str:
+        """
+        Receive command output through the serial connection.
+
+        Decoding happens because typically these serial instruments
+        don't understand UTF-8 and ask for binary encoded characters.
+        They also return this, so we have to decode our binary encoded string.
+        """
+        if self._serial.is_open is False:
+            self._serial.open()
+
+        return self._serial.readline().decode()
