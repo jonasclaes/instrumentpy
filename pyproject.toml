@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling", "pyserial"]
+requires = ["hatchling", "pyserial", "crc"]
 build-backend = "hatchling.build"
 
 [project]
 name = "instrumentpy"
-version = "0.0.7"
+version = "0.0.8"
 authors = [
   { name="Jonas Claes", email="jonas@jonasclaes.be" },
 ]

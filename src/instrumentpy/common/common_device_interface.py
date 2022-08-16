@@ -9,5 +9,5 @@ class CommonDeviceInterface():
     def send_command(self, data: str) -> bool:
         """Send a command over a connection to a device."""
 
-    def receive_output(self) -> str:
+    def receive_output(self, length: int = 1) -> str:
         """Receive output over a connection from a device."""

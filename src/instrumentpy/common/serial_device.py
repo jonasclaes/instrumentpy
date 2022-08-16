@@ -28,7 +28,7 @@ class SerialDevice(CommonDeviceInterface):
 
         return self._serial.write(data.encode())
 
-    def receive_output(self) -> str:
+    def receive_output(self, length=1) -> str:
         """
         Receive command output through the serial connection.
 
