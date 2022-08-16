@@ -39,4 +39,4 @@ class SerialDevice(CommonDeviceInterface):
         if self._serial.is_open is False:
             self._serial.open()
 
-        return self._serial.readline().decode()
+        return self._serial.readline()
