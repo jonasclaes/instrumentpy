@@ -23,7 +23,7 @@ class TCPIPDevice(CommonDeviceInterface):
         """
         return self._socket.send(data)
 
-    def receive_output(self, length=1) -> str:
+    def receive_output(self, length=1) -> bytes:
         """
         Receive command output through the socket connection.
         """

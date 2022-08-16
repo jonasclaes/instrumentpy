@@ -52,12 +52,10 @@ class TS3():
 
     def _send_command(self, *args):
         command = self._build_cmd(*args)
-        # self.socket.send(command)
         self._device.send_command(command)
 
     def _get_command_response(self, expected_command):
-        # response = self.socket.recv(512).decode()
-        response = self._device.receive_output(512)
+        response = self._device.receive_output(512).decode()
         response_array = response.split(";")
 
         if response_array[1] == "2":
