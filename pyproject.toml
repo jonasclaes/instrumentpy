@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "instrumentpy"
-version = "1.0.1"
+version = "1.0.2"
 authors = [
   { name="Jonas Claes", email="jonas@jonasclaes.be" },
 ]
@@ -12,6 +12,7 @@ description = "A library for controlling various instruments through Python."
 readme = "README.md"
 license = { file="LICENSE" }
 requires-python = ">=3.7"
+dependencies = ["pyserial", "crc"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
