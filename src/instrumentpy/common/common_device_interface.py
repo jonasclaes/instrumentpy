@@ -6,7 +6,7 @@
 class CommonDeviceInterface():
     """Common device interface."""
 
-    def send_command(self, data: str) -> bool:
+    def send_command(self, data: bytes) -> bool:
         """Send a command over a connection to a device."""
 
     def receive_output(self, length: int = 1) -> bytes:

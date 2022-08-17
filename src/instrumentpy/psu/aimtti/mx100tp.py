@@ -24,7 +24,7 @@ class MX100TP():
 
         Set output <N> to <NRF> Volts.
         """
-        self._device.send_command(f"V{channel} {value}\n")
+        self._device.send_command(f"V{channel} {value}\n".encode())
 
     def set_channel_voltage_with_verify(self, channel: int, value: float) -> None:
         """
@@ -32,7 +32,7 @@ class MX100TP():
 
         Set output <N> to <NRF> Volts with verify.
         """
-        self._device.send_command(f"V{channel}V {value}\n")
+        self._device.send_command(f"V{channel}V {value}\n".encode())
 
     def set_channel_over_voltage_protection(self, channel: int, value: float) -> None:
         """
@@ -40,7 +40,7 @@ class MX100TP():
 
         Set output <N> over voltage protection trip point to <NRF> Volts.
         """
-        self._device.send_command(f"OVP{channel} {value}\n")
+        self._device.send_command(f"OVP{channel} {value}\n".encode())
 
     def toggle_channel_over_voltage_protection(self, channel: int, state: str) -> None:
         """
@@ -49,7 +49,7 @@ class MX100TP():
         Enables or disables the over voltage protection trip point where <CPD>
         can be ON or OFF.
         """
-        self._device.send_command(f"OVP{channel} {state}\n")
+        self._device.send_command(f"OVP{channel} {state}\n".encode())
 
     def set_channel_current_limit(self, channel: int, value: float) -> None:
         """
@@ -57,7 +57,7 @@ class MX100TP():
 
         Set output <N> current limit to <NRF> Amps.
         """
-        self._device.send_command(f"I{channel} {value}\n")
+        self._device.send_command(f"I{channel} {value}\n".encode())
 
     def set_channel_over_current_protection(self, channel: int, value: float) -> None:
         """
@@ -65,7 +65,7 @@ class MX100TP():
 
         Set output <N> over current protection trip point to <NRF> Amps.
         """
-        self._device.send_command(f"OCP{channel} {value}\n")
+        self._device.send_command(f"OCP{channel} {value}\n".encode())
 
     def toggle_channel_over_current_protection(self, channel: int, value: str) -> None:
         """
@@ -74,7 +74,7 @@ class MX100TP():
         Enables or disables the over current protection trip point where <CPD>
         can be ON or OFF.
         """
-        self._device.send_command(f"OCP{channel} {value}\n")
+        self._device.send_command(f"OCP{channel} {value}\n".encode())
 
     def set_channel_current_measurement_averaging(self, channel: int, value: str) -> None:
         """
@@ -83,7 +83,7 @@ class MX100TP():
         Set the current meter measurement averaging of output <N> to <CPD >,
         where <CPD> can be ON, OFF, LOW, MED or HIGH.
         """
-        self._device.send_command(f"DAMPING{channel} {value}\n")
+        self._device.send_command(f"DAMPING{channel} {value}\n".encode())
 
     def get_channel_voltage_setpoint(self, channel: int) -> str:
         """
@@ -92,7 +92,7 @@ class MX100TP():
         Return the set voltage of output < N>.
         Response is V< N > <NR2><RMT> where <NR2> is in Volts.
         """
-        self._device.send_command(f"V{channel}?\n")
+        self._device.send_command(f"V{channel}?\n".encode())
         return self._device.receive_output().decode()
 
     def get_channel_current_limit_setpoint(self, channel: int) -> str:
@@ -102,7 +102,7 @@ class MX100TP():
         Return the set current limit of output <N>.
         Response is I< N> <NR2><RMT> where <NR2> is in Amps.
         """
-        self._device.send_command(f"I{channel}?\n")
+        self._device.send_command(f"I{channel}?\n".encode())
         return self._device.receive_output().decode()
 
     def get_channel_over_voltage_setpoint(self, channel: int) -> str:
@@ -114,7 +114,7 @@ class MX100TP():
         Note: If over voltage protection has been disabled the response is
         VP<N> <CRD><RMT> where <CRD> is OFF.
         """
-        self._device.send_command(f"OVP{channel}?\n")
+        self._device.send_command(f"OVP{channel}?\n".encode())
         return self._device.receive_output().decode()
 
     def get_channel_over_current_setpoint(self, channel: int) -> str:
@@ -126,7 +126,7 @@ class MX100TP():
         Note: If over current protection has been disabled the response is
         CP<N> <CRD><RMT> where <CRD> is OFF.
         """
-        self._device.send_command(f"OCP{channel}?\n")
+        self._device.send_command(f"OCP{channel}?\n".encode())
         return self._device.receive_output().decode()
 
     def get_channel_voltage(self, channel: int) -> float:
@@ -136,7 +136,7 @@ class MX100TP():
         Return the output readback voltage of output <N>
         Response is <NR2>V<RMT> where <NR2> is in Volts.
         """
-        self._device.send_command(f"V{channel}O?\n")
+        self._device.send_command(f"V{channel}O?\n".encode())
         return float(self._device.receive_output().decode().strip()[:-1])
 
     def get_channel_current(self, channel: int) -> float:
@@ -146,7 +146,7 @@ class MX100TP():
         Return the output readback current of output <N>
         Response is <NR2>A<RMT> where <NR2> is in Amps.
         """
-        self._device.send_command(f"I{channel}O?\n")
+        self._device.send_command(f"I{channel}O?\n".encode())
         return float(self._device.receive_output().decode().strip()[:-1])
 
     def set_channel_voltage_stepsize(self, channel: int, value: float) -> None:
@@ -155,7 +155,7 @@ class MX100TP():
 
         Set the output voltage step size of output <N> to <NRF> Volts.
         """
-        self._device.send_command(f"DELTAV{channel} {value}\n")
+        self._device.send_command(f"DELTAV{channel} {value}\n".encode())
 
     def set_channel_current_stepsize(self, channel: int, value: float) -> None:
         """
@@ -163,7 +163,7 @@ class MX100TP():
 
         Set the output current step size of output <N> to <NRF> Amps.
         """
-        self._device.send_command(f"DELTAI{channel} {value}\n")
+        self._device.send_command(f"DELTAI{channel} {value}\n".encode())
 
     def get_channel_voltage_stepsize(self, channel: int) -> str:
         """
@@ -172,7 +172,7 @@ class MX100TP():
         Return the output voltage step size of output < N>
         Response is DELTAV<N> <NR2><RMT>, where <NR2> is in Volts.
         """
-        self._device.send_command(f"DELTAV{channel}?\n")
+        self._device.send_command(f"DELTAV{channel}?\n".encode())
         return self._device.receive_output().decode()
 
     def get_channel_current_stepsize(self, channel: int) -> str:
@@ -182,7 +182,7 @@ class MX100TP():
         Return the output current step size of output <N>
         Response is DELTAI<N> <NR2><RMT >, where <NR2> is in Amps.
         """
-        self._device.send_command(f"DELTAI{channel}?\n")
+        self._device.send_command(f"DELTAI{channel}?\n".encode())
         return self._device.receive_output().decode()
 
     def increase_channel_voltage(self, channel: int) -> None:
@@ -191,7 +191,7 @@ class MX100TP():
 
         Increment the output<N> voltage by step size.
         """
-        self._device.send_command(f"INCV{channel}\n")
+        self._device.send_command(f"INCV{channel}\n".encode())
 
     def increase_channel_voltage_with_verify(self, channel: int) -> str:
         """
@@ -199,7 +199,7 @@ class MX100TP():
 
         Increment the output<N> voltage by step size, with verify.
         """
-        self._device.send_command(f"INCV{channel}V\n")
+        self._device.send_command(f"INCV{channel}V\n".encode())
         return self._device.receive_output().decode()
 
     def decrease_channel_voltage(self, channel: int) -> None:
@@ -208,7 +208,7 @@ class MX100TP():
 
         Decrement the output<N> voltage by step size.
         """
-        self._device.send_command(f"DECV{channel}\n")
+        self._device.send_command(f"DECV{channel}\n".encode())
 
     def decrease_channel_voltage_with_verify(self, channel: int) -> str:
         """
@@ -216,7 +216,7 @@ class MX100TP():
 
         Decrement output<N> voltage by step size, with verify.
         """
-        self._device.send_command(f"DECV{channel}V\n")
+        self._device.send_command(f"DECV{channel}V\n".encode())
         return self._device.receive_output().decode()
 
     def increase_channel_current(self, channel: int) -> None:
@@ -225,7 +225,7 @@ class MX100TP():
 
         Increment the output<N> current limit by step size.
         """
-        self._device.send_command(f"INCI{channel}\n")
+        self._device.send_command(f"INCI{channel}\n".encode())
 
     def decrease_channel_current(self, channel: int) -> None:
         """
@@ -233,7 +233,7 @@ class MX100TP():
 
         Decrement the output<N> current limit by step size.
         """
-        self._device.send_command(f"DECI{channel}\n")
+        self._device.send_command(f"DECI{channel}\n".encode())
 
     def set_channel(self, channel: int, value: int) -> None:
         """
@@ -242,7 +242,7 @@ class MX100TP():
         Set output<N> on/off where <NRF> has the following meaning:
         0=OFF, 1=ON.
         """
-        self._device.send_command(f"OP{channel} {value}\n")
+        self._device.send_command(f"OP{channel} {value}\n".encode())
 
     def enable_channel(self, channel: int) -> None:
         """
@@ -263,7 +263,7 @@ class MX100TP():
         Returns output<N> on/off status.
         The response is <NR1><RMT> where 1 = ON, 0 = OFF.
         """
-        self._device.send_command(f"OP{channel}?\n")
+        self._device.send_command(f"OP{channel}?\n".encode())
         return self._device.receive_output().decode()
 
     def set_all(self, value: int) -> None:
@@ -276,7 +276,7 @@ class MX100TP():
         sequence or to omit an output entirely. See section 9.4 for an
         explanation.
         """
-        self._device.send_command(f"OPALL {value}\n")
+        self._device.send_command(f"OPALL {value}\n".encode())
 
     def enable_all(self) -> None:
         """
@@ -296,7 +296,7 @@ class MX100TP():
 
         Attempt to clear all trip conditions.
         """
-        self._device.send_command("TRIPRST\n")
+        self._device.send_command("TRIPRST\n".encode())
 
     def set_channel_voltage_range(self, channel: int, value: int) -> None:
         """
@@ -308,7 +308,7 @@ class MX100TP():
         Output2: 1= 35V/3A, 2 = 16V/6A, 3 = 35V/6A.
         Output3: 1= 35V/3A, 2 = 70V/1.5A, 3 = 70V/3A.
         """
-        self._device.send_command(f"VRANGE{channel} {value}\n")
+        self._device.send_command(f"VRANGE{channel} {value}\n".encode())
 
     def get_channel_voltage_range(self, channel: int) -> str:
         """
@@ -320,7 +320,7 @@ class MX100TP():
         Output2: 1= 35V/3A, 2 = 16V/6A, 3 = 35V/6A.
         Output3: 1= 35V/3A, 2 = 70V/1.5A, 3 = 70V/3A.
         """
-        self._device.send_command(f"VRANGE{channel}?\n")
+        self._device.send_command(f"VRANGE{channel}?\n".encode())
         return self._device.receive_output().decode()
 
     def set_voltage_tracking_mode(self, value: int) -> None:
@@ -336,7 +336,7 @@ class MX100TP():
         These modes are as defined within the Setting Voltage Tracking
         section of this manual see section 9.1.
         """
-        self._device.send_command(f"CONFIG {value}\n")
+        self._device.send_command(f"CONFIG {value}\n".encode())
 
     def get_voltage_tracking_mode(self) -> str:
         """
@@ -351,7 +351,7 @@ class MX100TP():
         These modes are as defined within the Setting Voltage Tracking
         section of this manual see section 9.1.
         """
-        self._device.send_command("CONFIG?\n")
+        self._device.send_command("CONFIG?\n".encode())
         return self._device.receive_output().decode()
 
     def set_channel_on_delay(self, channel: int, value: int) -> None:
@@ -360,7 +360,7 @@ class MX100TP():
 
         Set output<N> Multi-On delay where <NRF> is in milliseconds
         """
-        self._device.send_command(f"ONDELAY{channel} {value}\n")
+        self._device.send_command(f"ONDELAY{channel} {value}\n".encode())
 
     def set_channel_off_delay(self, channel: int, value: int) -> None:
         """
@@ -368,7 +368,7 @@ class MX100TP():
 
         Set output<N> Multi-Off delay where <NRF> is in milliseconds
         """
-        self._device.send_command(f"OFFDELAY{channel} {value}\n")
+        self._device.send_command(f"OFFDELAY{channel} {value}\n".encode())
 
     def set_channel_on_action(self, channel: int, value: str) -> str:
         """
@@ -377,7 +377,7 @@ class MX100TP():
         Set output<N> Multi-On action where <CPD> can be QUICK, NEVER
         or DELAY.
         """
-        self._device.send_command(f"ONACTION{channel} {value}\n")
+        self._device.send_command(f"ONACTION{channel} {value}\n".encode())
         return self._device.receive_output().decode()
 
     def set_channel_off_action(self, channel: int, value: str) -> str:
@@ -387,7 +387,7 @@ class MX100TP():
         Set output<N> Multi-Off action where <CPD> can be QUICK, NEVER
         or DELAY.
         """
-        self._device.send_command(f"OFFACTION{channel} {value}\n")
+        self._device.send_command(f"OFFACTION{channel} {value}\n".encode())
         return self._device.receive_output().decode()
 
     def save_channel_settings(self, channel: int, value: int) -> str:
@@ -397,7 +397,7 @@ class MX100TP():
         Save the current settings of output<N> to the store specified by
         <NRF> where <NRF> can be 0-49.
         """
-        self._device.send_command(f"SAV{channel} {value}\n")
+        self._device.send_command(f"SAV{channel} {value}\n".encode())
         return self._device.receive_output().decode()
 
     def recall_channel_settings(self, channel: int, value: int) -> str:
@@ -407,7 +407,7 @@ class MX100TP():
         Recall the settings for output<N> from the store specified by <NRF>
         where <NRF> can be 0-49.
         """
-        self._device.send_command(f"RCL{channel} {value}\n")
+        self._device.send_command(f"RCL{channel} {value}\n".encode())
         return self._device.receive_output().decode()
 
     # Common commands
@@ -422,7 +422,7 @@ class MX100TP():
         type, <serial> is the interface serial number and <version> is the revision
         level of the firmware installed.
         """
-        self._device.send_command("*IDN?\n")
+        self._device.send_command("*IDN?\n".encode())
         return self._device.receive_output().decode()
 
     def factory_reset(self) -> None:
@@ -434,7 +434,7 @@ class MX100TP():
         Does not affect the contents of the Save and Recall stores.
         Does not affect any remote interface settings.
         """
-        self._device.send_command("*RST\n")
+        self._device.send_command("*RST\n".encode())
 
     def save_settings(self, memory_store: int = 0) -> None:
         """
@@ -447,7 +447,7 @@ class MX100TP():
         if memory_store < 0 or memory_store > 49:
             raise ValueError(
                 "Memory store out of range. 0-49 inclusive is allowed.")
-        self._device.send_command(f"*SAV {memory_store}\n")
+        self._device.send_command(f"*SAV {memory_store}\n".encode())
 
     def recall_settings(self, memory_store: int = 0) -> None:
         """
@@ -460,7 +460,7 @@ class MX100TP():
         if memory_store < 0 or memory_store > 49:
             raise ValueError(
                 "Memory store out of range. 0-49 inclusive is allowed.")
-        self._device.send_command(f"*RCL {memory_store}\n")
+        self._device.send_command(f"*RCL {memory_store}\n".encode())
 
     def set_operation_complete_bit(self) -> None:
         """
@@ -470,7 +470,7 @@ class MX100TP():
         Register. This will happen immediately the command is executed because
         of the sequential nature of all operations.
         """
-        self._device.send_command("*OPC\n")
+        self._device.send_command("*OPC\n".encode())
 
     def get_operation_complete_status(self) -> str:
         """
@@ -480,7 +480,7 @@ class MX100TP():
         The response is always 1<RMT> and is available immediately the command
         is executed because all commands are sequential.
         """
-        self._device.send_command("*OPC?\n")
+        self._device.send_command("*OPC?\n".encode())
         return self._device.receive_output().decode()
 
     def wait_for_complete(self) -> None:
@@ -490,7 +490,7 @@ class MX100TP():
         Wait for Operation Complete true.
         This command does nothing because all operations are sequential.
         """
-        self._device.send_command("*WAI\n")
+        self._device.send_command("*WAI\n".encode())
 
     def self_test(self) -> str:
         """
@@ -498,7 +498,7 @@ class MX100TP():
 
         The product has no self-test capability and the response is always 0<RMT>.
         """
-        self._device.send_command("*TST?\n")
+        self._device.send_command("*TST?\n".encode())
         return self._device.receive_output().decode()
 
     def trigger(self) -> None:
@@ -508,7 +508,7 @@ class MX100TP():
         The product has no trigger capability. The command is ignored in this
         instrument.
         """
-        self._device.send_command("*TRG\n")
+        self._device.send_command("*TRG\n".encode())
 
     # Status commands
 
@@ -519,7 +519,7 @@ class MX100TP():
         Clear Status. Clears all status indications, including the Status Byte.
         Does not clear any Enable Registers.
         """
-        self._device.send_command("*CLS\n")
+        self._device.send_command("*CLS\n".encode())
 
     def query_and_clear_limit_status_register(self, register_number: int) -> str:
         """
@@ -528,7 +528,7 @@ class MX100TP():
         Query and clear the Limit Status Register<N>. The response format is
         <NR1><RMT>. See Status Reporting section for details of the response.
         """
-        self._device.send_command(f"LSR{register_number}?\n")
+        self._device.send_command(f"LSR{register_number}?\n".encode())
         return self._device.receive_output().decode()
 
     def set_limit_status_enable_register(self, register_number: int, limit: float) -> None:
@@ -537,7 +537,7 @@ class MX100TP():
 
         Set the Limit Status Enable Register<N> to <NRF>.
         """
-        self._device.send_command(f"LSE{register_number} {limit}\n")
+        self._device.send_command(f"LSE{register_number} {limit}\n".encode())
 
     def get_limit_status_enable_register(self, register_number: int) -> str:
         """
@@ -546,7 +546,7 @@ class MX100TP():
         Returns the value in the value in the Limit Status Enable Register<N>.
         The response format is<NR1><RMT>.
         """
-        self._device.send_command(f"LSE{register_number}?\n")
+        self._device.send_command(f"LSE{register_number}?\n".encode())
         return self._device.receive_output().decode()
 
     def query_and_clear_execution_error_register(self) -> str:
@@ -556,7 +556,7 @@ class MX100TP():
         Query and clear Execution Error Register. The response format is
         <NR1><RMT>.
         """
-        self._device.send_command("EER?\n")
+        self._device.send_command("EER?\n".encode())
         return self._device.receive_output().decode()
 
     def query_and_clear_query_error_register(self) -> str:
@@ -566,7 +566,7 @@ class MX100TP():
         Query and clear Query Error Register. The response format is
         <NR1><RMT>.
         """
-        self._device.send_command("QER?\n")
+        self._device.send_command("QER?\n".encode())
         return self._device.receive_output().decode()
 
     def get_status_byte(self) -> str:
@@ -578,7 +578,7 @@ class MX100TP():
         poll, not by this query, as any previous message must have already been
         sent.
         """
-        self._device.send_command("*STB?\n")
+        self._device.send_command("*STB?\n".encode())
         return self._device.receive_output().decode()
 
     def set_service_request_enable_register(self, value: float) -> None:
@@ -587,7 +587,7 @@ class MX100TP():
 
         Sets the Service Request Enable Register to <NRF>
         """
-        self._device.send_command(f"*SRE {value}\n")
+        self._device.send_command(f"*SRE {value}\n".encode())
 
     def get_service_request_enable_register(self) -> str:
         """
@@ -596,7 +596,7 @@ class MX100TP():
         Report the value in the Service Request Enable Register.
         The response is <NR1><RMT>.
         """
-        self._device.send_command("*SRE?\n")
+        self._device.send_command("*SRE?\n".encode())
         return self._device.receive_output().decode()
 
     def set_parallel_poll_enable_register(self, value: float) -> None:
@@ -605,7 +605,7 @@ class MX100TP():
 
         Set the Parallel Poll Enable Register to the value <NRF>.
         """
-        self._device.send_command(f"*PRE {value}\n")
+        self._device.send_command(f"*PRE {value}\n".encode())
 
     def get_parallel_poll_enable_register(self) -> str:
         """
@@ -614,7 +614,7 @@ class MX100TP():
         Report the value in the Parallel Poll Enable Register.
         The response is <NR1><RMT>.
         """
-        self._device.send_command("*PRE?\n")
+        self._device.send_command("*PRE?\n".encode())
         return self._device.receive_output().decode()
 
     def get_ist_state(self) -> str:
@@ -624,7 +624,7 @@ class MX100TP():
         Returns the state of the ist local message as defined by IEEE Std. 488.2.
         The response is 0<RMT> if the local message is false, or 1<RMT> if true.
         """
-        self._device.send_command("*IST?\n")
+        self._device.send_command("*IST?\n".encode())
         return self._device.receive_output().decode()
 
     # Interface Management Commands
@@ -635,7 +635,7 @@ class MX100TP():
 
         Go to local. Any subsequent command will restore the remote state.
         """
-        self._device.send_command("LOCAL\n")
+        self._device.send_command("LOCAL\n".encode())
 
     def set_interface_lock(self, state: int) -> None:
         """
@@ -647,7 +647,7 @@ class MX100TP():
         of conflict with a lock on this or another interface, or the user has disabled
         this interface from taking control using the web interface.
         """
-        self._device.send_command(f"IFLOCK {state}\n")
+        self._device.send_command(f"IFLOCK {state}\n".encode())
 
     def get_interface_lock(self) -> str:
         """
@@ -661,7 +661,7 @@ class MX100TP():
         or the user has disabled this interface from taking control (via the web
         interface).
         """
-        self._device.send_command("IFLOCK?\n")
+        self._device.send_command("IFLOCK?\n".encode())
         return self._device.receive_output().decode()
 
     def get_interface_address(self) -> str:
@@ -670,7 +670,7 @@ class MX100TP():
 
         Returns the GPIB bus Address. The response is <NR1><RMT>.
         """
-        self._device.send_command("ADDRESS?\n")
+        self._device.send_command("ADDRESS?\n".encode())
         return self._device.receive_output().decode()
 
     def get_ip_address(self) -> str:
@@ -684,7 +684,7 @@ class MX100TP():
         Auto-IP.
         The response is nnn.nnn.nnn.nnn<RMT>, where each nnn is 0 to 255.
         """
-        self._device.send_command("IPADDR?\n")
+        self._device.send_command("IPADDR?\n".encode())
         return self._device.receive_output().decode()
 
     def get_netmask(self) -> str:
@@ -694,7 +694,7 @@ class MX100TP():
         Returns the present netmask of the LAN interface, provided it is connected.
         The response is nnn.nnn.nnn.nnn<RMT>, where each nnn is 0 to 255.
         """
-        self._device.send_command("NETMASK?\n")
+        self._device.send_command("NETMASK?\n".encode())
         return self._device.receive_output().decode()
 
     def get_netconfig(self) -> str:
@@ -704,7 +704,7 @@ class MX100TP():
         Returns the first means by which an IP address will be sought.
         The response is <CRD><RMT > where <CRD> is DHCP, AUTO or STATIC.
         """
-        self._device.send_command("NETCONFIG?\n")
+        self._device.send_command("NETCONFIG?\n".encode())
         return self._device.receive_output().decode()
 
     def set_netconfig(self, config_type: str) -> None:
@@ -714,7 +714,7 @@ class MX100TP():
         Specifies the first means by which an IP address will be sought.
         <CPD> must be one of DHCP, AUTO or STATIC.
         """
-        self._device.send_command(f"NETCONFIG {config_type}\n")
+        self._device.send_command(f"NETCONFIG {config_type}\n".encode())
 
     def set_ip_address(self, address: str) -> None:
         """
@@ -725,7 +725,7 @@ class MX100TP():
         The parameter must be strictly a dotted quad for the IP address, with each
         address part an <NR1> in the range 0 to 255, (e.g. 192.168.1.101).
         """
-        self._device.send_command(f"IPADDR {address}\n")
+        self._device.send_command(f"IPADDR {address}\n".encode())
 
     def set_netmask(self, address: str) -> None:
         """
@@ -735,4 +735,4 @@ class MX100TP():
         The parameter must be strictly a dotted quad for the netmask, with each
         part an <NR1> in the range 0 to 255, (e.g. 255.255.255.0).
         """
-        self._device.send_command(f"NETMASK {address}\n")
+        self._device.send_command(f"NETMASK {address}\n".encode())

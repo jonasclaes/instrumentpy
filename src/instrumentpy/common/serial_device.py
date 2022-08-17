@@ -16,7 +16,7 @@ class SerialDevice(CommonDeviceInterface):
         super().__init__()
         self._serial = serial
 
-    def send_command(self, data: str) -> bool:
+    def send_command(self, data: bytes) -> bool:
         """
         Send a command through the serial connection.
 
@@ -26,7 +26,7 @@ class SerialDevice(CommonDeviceInterface):
         if self._serial.is_open is False:
             self._serial.open()
 
-        return self._serial.write(data.encode())
+        return self._serial.write(data)
 
     def receive_output(self, length=1) -> bytes:
         """
